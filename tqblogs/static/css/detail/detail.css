@@ -1,0 +1,191 @@
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,
+strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,
+label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,
+embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,
+time,mark,audio,video{
+    margin:0;padding:0;border:0;
+    font-size:100%;font:inherit;
+    vertical-align:baseline}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{
+    display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
+table{border-collapse:collapse;border-spacing:0}
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+.breadcrumbs{
+    width: 843px;
+    margin-top: 60px;
+    margin-left: 16px;
+    margin-bottom: -18px;
+
+}
+
+.breadcrumbs .breadcrumb{
+    margin-top: 10px
+}
+
+.articleDetail{
+    margin-top: 330px
+}
+
+.like{
+    text-align: center;
+    margin-top: 10px
+}
+
+.previous_next{
+    margin-top: 10px
+}
+
+.previous_next .next{
+    margin-left: 529px;
+    margin-top: -19px
+}
+
+.contact{
+    margin-top: 40px
+}
+
+.contact .comments{
+    margin-top: 15px
+}
+
+.comments img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden
+}
+
+.p_reply{
+    margin-left: 60px;
+    margin-top: 6px;
+}
+
+.span1{
+    margin-left: 8px
+}
+
+.span2{
+    display: block;
+    margin-left: 64px;
+}
+
+#comment textarea{
+    height:141px;
+    width:413px;
+    margin-left:48px;
+}
+
+#comment input[type="submit"]{
+    margin-right:324px;
+    margin-top:116px;
+}
+
+#comment input[value="取消回复"]{
+    margin-right:238px;
+    margin-top:-55px;
+}
+
+#words-minute{
+    margin-left: 580px;
+    margin-top: -43px;
+}
+
+.articleList .articleDetail{
+    margin: 330px auto 0;
+}
+
+
+@media only screen and (max-width: 481px) {
+
+
+
+    .detail-footer footer{
+            margin-top: 1864px;
+    }
+
+    .span2 {
+        display: block;
+        margin-left: 40px;
+    }
+
+    #index-nav {
+        margin-top: 166px;
+    }
+
+    #contactform input[type="submit"]{
+            margin-top: 338px;
+            margin-left: 115px;
+    }
+
+    #footer{
+            margin-top: 881px;
+    }
+
+    #emailMessage{
+            margin-top:213px;
+    }
+
+    .previous_next .next{
+            margin-left: 240px;
+            margin-top: -18px;
+    }
+
+    #comment textarea{
+            height: 127px;
+            width: 259px;
+            margin-left: 0;
+        }
+
+    #comment input[type="submit"]{
+            margin-left: 4px;
+            margin-top: 97px;
+    }
+
+    #comment input[value="取消回复"]{
+            margin-left: 3px;
+            margin-top: 64px;
+    }
+
+    .comments img{
+        width: 36px;
+        height: 36px;
+    }
+
+    .contact .comments{
+        font-size: 12px;
+    }
+
+    .breadcrumbs{
+        display: none;
+    }
+
+    #words-minute{
+        margin-left: 59px;
+        margin-top: 63px;
+        margin-bottom: -22px;
+    }
+
+    .articleDetail {
+        margin-top: 342px;
+    }
+
+    .previous_next > p{
+        font-size: 12px;
+    }
+
+    .p_reply{
+        margin-left: 24px;
+    }
+
+}
+

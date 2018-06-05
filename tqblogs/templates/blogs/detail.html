@@ -1,0 +1,144 @@
+{% extends 'blogs/index.html' %}
+{% load staticfiles %}
+{% block title %}
+<title>{{ blogs.title}} | 漂泊在北京的个人博客 </title>
+{% endblock title %}
+{% block link%}
+<link rel="stylesheet" href="{% static 'css/detail/style.css' %}" type="text/css" media="screen">
+<link rel="stylesheet" href="{% static 'css/detail/detail.css' %}" type="text/css" media="screen">
+{% endblock link%}
+{% block content %}
+
+<!--面包屑-->
+<div class="breadcrumbs">
+    <ol class="breadcrumb">
+        <li>当前位置：</li>
+        <li><a href="{% url 'blogs:index' %}">首页</a></li>
+        <li>
+            {% for cate in blogs.category.all %}
+            <a href="{% url 'blogs:article' cate %}">{{ cate }}</a>
+            {% endfor %}
+        </li>
+        <li class="active">{{ blogs.title }}</li>
+    </ol>
+</div>
+<!--面包屑 over-->
+
+<!--阅读-->
+<div id="words-minute">
+    <p>本文约<span id="words">{{ number }}</span>字&nbsp&nbsp&nbsp&nbsp阅读需要<span id="minute">{{ minute }}</span>分钟左右</p>
+</div>
+
+<!--文章详情-->
+<div class="articleDetail container">
+      	<div class="row">
+		    <div class="col-md-12">
+			   <div class="articleContent">
+				<!-- 标题 -->
+				<div class="title">{{ blogs.title }}</div>
+                <!-- 标题 over-->
+				    <div class="secTitleBar">
+                        <ul>
+                            <li><i class="fa fa-user"></i>{{ blogs.author }}</li>
+                            <li><i class="fa fa-angellist"></i><a href="{% url 'blogs:article' blogs.original %}" rel="category">{{ blogs.original }}</a></li>
+                            <li><i class="fa fa-folder-o"></i>
+                                {% for cate in blogs.category.all %}
+                                    <a href="{% url 'blogs:article' cate %}" rel="category">{{ cate }}&nbsp</a>
+                                {% endfor %}
+                            </li>
+                            <li><i class="fa fa-calendar"></i>{{ blogs.create_time }}</li>
+                            <li><i class="fa fa-eye"></i>({{ blogs.view }})阅</li>
+                            <li><i class="fa fa-comments"></i>(<span id="number">{{ comment.count }}</span>)</li>
+                        </ul>
+				</div>
+				<!-- 内容 -->
+				<div class="articleCon post_content">
+                    {% autoescape off %}
+                    {{ blogs.context | safe}}
+                    {% endautoescape %}
+                </div>
+                <!-- 内容 over-->
+            </div>
+             <hr />
+            <!-- 点赞-->
+            <div class="like">
+                <div id="like" style="display: inline"><i class="fa fa-thumbs-up"></i>点赞(<span id="like_number">{{ blogs.like }}</span>)</div>
+            </div>
+            <!-- 点赞 over-->
+
+            <!-- 上下页 -->
+            <div class="previous_next">
+                {% if not previous %}
+                    <p>暂无上一篇</p>
+                {% else %}
+                    <p>上一篇：<a href="{% url 'blogs:detail' previous.id %}"><i class="fa fa-angle-double-left"></i>&nbsp;&nbsp;&nbsp;{{ previous.title }}</a></p>
+                {% endif %}
+
+                {% if not next %}
+                    <p class="next">暂无下一篇</p>
+                {% else %}
+                    <p class="next">下一篇：<a href="{% url 'blogs:detail' next.id %}">{{ next.title }} &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i></a></p>
+                {% endif %}
+            </div>
+            <!-- 上下页 over-->
+
+            <!-- 评论 -->
+              <div id="contactform" class="contact" >
+                  <h3>共(<span id="number1">{{ comment.count }}</span>)条评论：</h3>
+                  <div class="comments" id="comment">
+                      {% if not comment %}
+                          <p id="null" style="text-align: center">暂无评论,快来占沙发吧！</p>
+                      {% else %}
+                        {% for c in comment %}
+                          <div>
+                              <span><img src="{% static c.c_head %}" class="img-thumbnail" alt="{{ c.c_name }}">&nbsp;&nbsp;By&nbsp;{{ c.c_name }}</span>
+                              <span>On&nbsp;{{ c.create_time }}</span>
+                              <span class="span1" id="r_btn{{ c.c_id }}">回复</span>
+                              <span class="span2" id="span{{ forloop.counter }}">{{ c.c_context }}</span>
+                              {% for rc in reply %}
+                                  {% if rc.rc_comment_id == c.id %}
+                                        <p class="p_reply">
+                                            <span><img src="{% static rc.rc_img %}" class="img-thumbnail" alt="{{ rc.rc_name }}">&nbsp;&nbsp;By&nbsp;{{ rc.rc_name }}&nbsp;reply&nbsp;{{ c.c_name }}&nbsp;</span>
+                                            <span>On&nbsp;{{ rc.create_time }}</span>
+                                            <span class="span1" id="r_btn{{ rc.id }}"></span>
+                                            <span class="span2" id="span{{ forloop.counter }}">{{ rc.rc_context }}</span>
+                                        </p>
+                                      {% else %}
+                                  {% endif %}
+                              {% endfor %}
+                          </div>
+                  {% endfor %}
+                {% endif %}
+                  </div>
+{#                        <div id="contactInfo" style="margin-top: 18px">#}
+{#                        <p>#}
+{#                            <label class="smallInput" for="name">昵称<span class="required"></span></label><br>#}
+{#                            <input type="text" name="name" id="name" value="" class="input round3" placeholder="昵称默认随机产生" readonly="readonly" >#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            {% autoescape on %}#}
+{#                            <label class="smallInput" for="email">邮箱<span class="required">*</span></label><br>#}
+{#                            <input type="text" name="email" id="email" value="" class="input round3" placeholder="必填字段" >#}
+{#                            {% endautoescape %}#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            <label class="smallInput" for="site">网站</label><br>#}
+{#                            <input type="text" name="site" id="site" value="" class="input round3" placeholder="选填字段">#}
+{#                        </p>#}
+{#                        </div>#}
+{#                        <p id="emailMessage">#}
+{#                            <label class="smallInput" for="message">内容<span class="required">*</span></label><br>#}
+{#                            {% autoescape on %}#}
+{#                            <textarea name="message" id="message" class="input round3" placeholder="必填字段"></textarea>#}
+{#                            {% endautoescape %}#}
+{##}
+{#                        </p>#}
+{#                          <input name="send" id="submit_btn" type="submit" class="round3 clearRight" value="提交">#}
+                  </div>
+            <!-- 评论 over-->
+              </div>
+        </div>
+  </div>
+<!--文章详情 over-->
+
+{% endblock content %}

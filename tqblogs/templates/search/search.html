@@ -1,0 +1,71 @@
+{% extends 'blogs/index.html' %}
+{% load staticfiles %}
+{% block title %}
+<title>{{ query }} | 漂泊在北京的个人博客 </title>
+{% endblock title %}
+{% block content %}
+{% if query %}
+<!--文章列表-->
+<div class="articleList container" style="margin-top: 60px">
+    <div class="row">
+        <div class="col-md-12">
+            {% for result in page.object_list %}
+
+                {% if result.object.original %}
+                    <div class="article">
+                        <div class="articleHeader">
+                            <h1 class="articleTitle">
+                                <a href="{% url 'blogs:detail' result.object.id  %}" target="_blank">{{ result.object.title }}</a>
+                            </h1>
+                            <span class="cate-Div">
+                                {% for cate in result.object.category.all %}
+                                <i class="fa fa-map-marker"></i>{{ cate }}
+                                {% endfor %}
+                            </span>
+                            </div>
+                            <div class="articleBody clearfix">
+                                <!--缩略图-->
+                                <div class="articleThumb">
+                                    <a href="{% url 'blogs:detail' result.object.id %}" target="_blank"><img src="http://127.0.0.1:8000/static/upload/{{ result.object.image }}" alt="{{ result.object.a_title }}"></a>
+                                </div>
+                                <!--摘要-->
+                                <div class="articleFeed">
+                                    <p>{{ result.object.desc }}</p>
+                                </div>
+                            </div>
+                            <div class="articleFooter clearfix">
+                                <ul class="articleStatu">
+                                    <li><i class="fa fa-calendar"></i>{{ result.object.create_time }}</li>
+                                    <li><a href="{% url 'blogs:article' result.object.original %}"><i class="fa fa-angellist"></i>{{ result.object.original }}</a></li>
+                                    <li><a href="#"><i class="fa fa-folder-o"></i></a>
+                                        {% for cate in result.object.category.all %}
+                                        <a href="{% url 'blogs:article' cate %}" rel="category">{{ cate }}</a></li>
+                                        {% endfor %}
+                                    <li><i class="fa fa-eye"></i>{{ result.object.view }}次浏览</li>
+                                    <li><i class="fa fa-thumbs-up"></i>点赞({{ result.object.like }})</li>
+
+                                </ul>
+                                <a href="{% url 'blogs:detail' result.object.id %}" target="_blank" class="btn btn-readmore btn-info btn-md">阅读更多</a>
+                            </div>
+                        </div>
+                {% endif %}
+
+                {% empty %}
+            {% endfor %}
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}« 上一页{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}下一页{% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <p style="margin-top: 50px">没有结果，试试跟换一下关键字试试，或者<a href="http://www.baidu.com">百度一下，你就知道</a></p>
+{% endif %}
+
+        </div>
+    </div>
+</div>
+<!--文章列表 over-->
+{% endblock content%}
+
