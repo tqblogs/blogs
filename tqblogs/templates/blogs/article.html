@@ -1,7 +1,7 @@
 {% extends 'blogs/index.html' %}
 {% load staticfiles %}
 {% block title %}
-<title>{{ type }} | 漂泊在北京的个人博客 </title>
+<title>{{ type }} | 追梦者的个人博客 </title>
 {% endblock %}
 
 {% block content %}
@@ -23,7 +23,7 @@
                 <div class="articleBody clearfix">
                     <!--缩略图-->
                     <div class="articleThumb">
-                        <a href="{% url 'blogs:detail' blogs.id %}"><img src="http://127.0.0.1:8000/static/upload/{{ blogs.image }}" alt="{{ blogs.desc }}" title="{{ blogs.title }}"></a>
+                        <a href="{% url 'blogs:detail' blogs.id %}"><img src="https://www.tqblogs.cn/static/upload/{{ blogs.image }}" alt="{{ blogs.desc }}" title="{{ blogs.title }}"></a>
                     </div>
                     <!--摘要-->
                     <div class="articleFeed">
@@ -56,7 +56,7 @@
                 <div class="col-md-12">
                     <nav style="text-align: center">
                       <ul class="pagination">
-                          <li><span id="btn" style="color: gray;">点击加载更多....</span></li>
+                          <li><span id="btn" style="color: gray;">加载更多</span></li>
                       </ul>
                     </nav>
                 </div>
@@ -75,13 +75,13 @@
      var params = {'page': page, 'page_size': page_size, 'type': type};
      $('#btn').click(function () {
          var btn = $('#btn');
-         btn[0].innerHTML = '加载中....';
+         btn[0].innerHTML = '加载中..';
          $.ajax({
              type: 'POST',
              dataType: 'json',
              data: params,
              headers: {"X-CSRFtoken": csrf_token},
-             url: 'http://127.0.0.1:8000/articles/' + '{{ type }}/'+'?page='+page,
+             url: 'https://www.tqblogs.cn/articles/' + '{{ type }}/'+'?page='+page,
              success: function (data) {
                  if (data.code === 200) {
                      var arr = data.data;
@@ -121,14 +121,14 @@
                                  '                </div>\n' +
                                  '            </div>\n');
 
-                             btn[0].innerHTML = '加载更多....';
+                             btn[0].innerHTML = '加载更多';
                          }
                  }
              },
              error:function (XMLHttpRequest, textStatus, errorThrown) {
                  console.log(XMLHttpRequest.status);
                  if(XMLHttpRequest.status === 404){
-                     btn[0].innerHTML = '已经到底了..';
+                     btn[0].innerHTML = '到底了';
                  }
              }
          });

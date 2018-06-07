@@ -1,0 +1,16 @@
+[2018-06-07 22:12:17 +0800] [1690] [INFO] Starting gunicorn 19.8.1
+[2018-06-07 22:12:17 +0800] [1690] [INFO] Listening at: http://127.0.0.1:8000 (1690)
+[2018-06-07 22:12:17 +0800] [1690] [INFO] Using worker: sync
+[2018-06-07 22:12:17 +0800] [1693] [INFO] Booting worker with pid: 1693
+Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 1.259 seconds.
+Prefix dict has been built succesfully.
+Not Found: /robots.txt
+Not Found: /.well-known/acme-challenge/buiQvD1WNPa8Oc31hB8AjnbPw4xQghs5uX4nE56A5KA
+Not Found: /articles/python/
+[2018-06-08 00:59:31 +0800] [9945] [INFO] Starting gunicorn 19.8.1
+[2018-06-08 00:59:31 +0800] [9945] [INFO] Listening at: http://127.0.0.1:8000 (9945)
+[2018-06-08 00:59:31 +0800] [9945] [INFO] Using worker: sync
+[2018-06-08 00:59:31 +0800] [9949] [INFO] Booting worker with pid: 9949
+Not Found: /robots.txt

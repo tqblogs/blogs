@@ -7,13 +7,13 @@ var params = {'offset':offset, 'limit':limit};
 
 $('#btn').click(function () {
     var btn = $('#btn');
-    btn[0].innerHTML = '加载中....';
+    btn[0].innerHTML = '加载中..';
     $.ajax({
         type:'POST',
         dataType:'json',
         data:params,
         headers:{"X-CSRFtoken":csrf_token},
-        url:'http://127.0.0.1:8000/?limit='+limit+'&offset='+offset,
+        url:'https://www.tqblogs.cn/?limit='+limit+'&offset='+offset,
         success:function (data) {
             if(data.code === 200){
                 var arr = data.data;
@@ -54,10 +54,10 @@ $('#btn').click(function () {
                         '                </div>\n' +
                         '            </div>\n');
 
-                        btn[0].innerHTML = '加载更多....';
+                        btn[0].innerHTML = '加载更多';
                     }
                 }else {
-                    btn[0].innerHTML = '到底了....';
+                    btn[0].innerHTML = '到底了';
                 }
             }
         }

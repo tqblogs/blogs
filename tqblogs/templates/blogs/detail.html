@@ -1,7 +1,7 @@
 {% extends 'blogs/index.html' %}
 {% load staticfiles %}
 {% block title %}
-<title>{{ blogs.title}} | 漂泊在北京的个人博客 </title>
+<title>{{ blogs.title}} | 追梦者的个人博客 </title>
 {% endblock title %}
 {% block link%}
 <link rel="stylesheet" href="{% static 'css/detail/style.css' %}" type="text/css" media="screen">
@@ -87,7 +87,7 @@
                   <h3>共(<span id="number1">{{ comment.count }}</span>)条评论：</h3>
                   <div class="comments" id="comment">
                       {% if not comment %}
-                          <p id="null" style="text-align: center">暂无评论,快来占沙发吧！</p>
+                          <p id="null" style="text-align: center">评论暂时关闭!</p>
                       {% else %}
                         {% for c in comment %}
                           <div>
@@ -140,5 +140,26 @@
         </div>
   </div>
 <!--文章详情 over-->
+<script>
+    var blogs_id = '{{ blogs.id }}';
+    var params = {'blogs_id':blogs_id};
+
+    $('#like').click(function () {
+        $.ajax({
+            type:"POST",
+            dataType:"json",
+            data:params,
+            url:"{% url 'blogs:detail' blogs.id%}",
+            success:function (data) {
+                if (data.code === 200){
+                    like_number = $('#like_number');
+                    like_number[0].innerHTML = data.like
+                }else if(data.code === 201){
+                    alert('您已经点过赞了')
+                }
+            }
+        })
+    })
+    </script>
 
 {% endblock content %}

@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ form.media }}
     {% block title %}
-    <title>首页 | 追梦者的个人博客 </title>
+    <title>博文首页 | 追梦者的个人博客 </title>
     {% endblock title %}
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
@@ -91,7 +91,7 @@
     <div class="carousel-inner">
     {% for frist in carousel_first %}
       <div class="item active">
-          <a href="{% url 'blogs:detail' frist.id %}"><img src="http://127.0.0.1:8000/static/upload/{{ frist.image }}" alt="{{ frist.desc }}" title="{{ frist.title }}"></a>
+          <a href="{% url 'blogs:detail' frist.id %}"><img src="https://www.tqblogs.cn/static/upload/{{ frist.image }}" alt="{{ frist.desc }}" title="{{ frist.title }}"></a>
          <div class="carousel-caption">
              <h3>{{ frist.title }}</h3>
             </div>
@@ -99,7 +99,7 @@
     {% endfor %}
         {% for blogs in carousel %}
       <div class="item">
-          <a href="{% url 'blogs:detail' blogs.id %}"><img src="http://127.0.0.1:8000/static/upload/{{ blogs.image }}" alt="{{ blogs.desc  }}" title="{{ blogs.title }}"></a>
+          <a href="{% url 'blogs:detail' blogs.id %}"><img src="https://www.tqblogs.cn/static/upload/{{ blogs.image }}" alt="{{ blogs.desc  }}" title="{{ blogs.title }}"></a>
          <div class="carousel-caption">
              <h3>{{ blogs.title }}</h3>
             </div>
@@ -135,7 +135,7 @@
                 <div class="articleBody clearfix">
                     <!--缩略图-->
                     <div class="articleThumb">
-                        <a href="{% url 'blogs:detail' blogs.id %}"><img src="http://127.0.0.1:8000/static/upload/{{ blogs.image }}" alt="{{ blogs.title }}" title="{{ blogs.title }}"></a>
+                        <a href="{% url 'blogs:detail' blogs.id %}"><img src="https://www.tqblogs.cn/static/upload/{{ blogs.image }}" alt="{{ blogs.title }}" title="{{ blogs.title }}"></a>
                     </div>
                     <!--摘要-->
                     <div class="articleFeed">
@@ -169,7 +169,7 @@
         <div class="col-md-12">
             <nav style="text-align: center">
               <ul class="pagination">
-                  <li><span id="btn" style="color: gray;">加载更多....</span></li>
+                  <li><span id="btn" style="color: gray;">加载更多</span></li>
               </ul>
             </nav>
         </div>
@@ -213,11 +213,11 @@
                             <span class="title">友情链接</span>
                                 <div class="box friend-links clearfix">
                                     {% for link in links %}
-                                    <p style="text-align: center;"><a style="color: grey" href="{{ link.url }}" target="_blank" title="{{ link.desc }}">{{ link.name }}</a></p>
+                                    <p style="text-align: center;margin-top: 10px;"><a style="color: grey" href="{{ link.url }}" target="_blank" title="{{ link.desc }}">{{ link.name }}</a></p>
                                     {% endfor %}
-                                    <p style="text-align: center;"><a style="color: grey" href="http://www.baidu.com" target="_blank" title="#">百度一下</a></p>
-                                    <p style="text-align: center;"><a style="color: grey" href="http://www.bing.com" target="_blank" title="#">必应一下</a></p>
-                                    <p style="text-align: center;"><a style="color: grey" href="http://www.tqblogs.cn" target="_self" title="#">刷新一下</a></p>
+                                    <p style="text-align: center;margin-top: 10px;"><a style="color: grey" href="http://www.baidu.com" target="_blank" title="#">百度一下</a></p>
+                                    <p style="text-align: center;margin-top: 10px;"><a style="color: grey" href="http://www.bing.com" target="_blank" title="#">必应一下</a></p>
+                                    <p style="text-align: center;margin-top: 10px;"><a style="color: grey" href="http://www.tqblogs.cn" target="_self" title="#">刷新一下</a></p>
                                 </div>
                             </div>
                         </div>
@@ -256,7 +256,7 @@
         var a_idx = 0;
         jQuery(document).ready(function($) {
             $("body").click(function(e) {
-                var a = new Array({% for w in world %}'{{ w.world }}',{% endfor %});
+                var a = new Array({% for w in world %}"{{ w.world }}",{% endfor %});
                 var $i = $("<span/>").text(a[a_idx]);
                 a_idx = (a_idx + 1) % a.length;
                 var x = e.pageX,

@@ -32,31 +32,31 @@ class ArticleSerializer(serializers.ModelSerializer):
 
         if settings.DEBUG:
 
-            return 'http://'+settings.ALLOWED_HOSTS[0]+':8000/details/'+str(obj.id)
+            return 'https://'+settings.ALLOWED_HOSTS[0]+':8000/details/'+str(obj.id)
         else:
-            return 'http://'+settings.ALLOWED_HOSTS[2]+'/details/'+str(obj.id)
+            return 'https://'+settings.ALLOWED_HOSTS[2]+'/details/'+str(obj.id)
 
     def gain_article_image(self, obj):
 
         if settings.DEBUG:
-            return 'http://' + settings.ALLOWED_HOSTS[0] + ':8000/static/upload/' + str(obj.image)
+            return 'https://' + settings.ALLOWED_HOSTS[0] + ':8000/static/upload/' + str(obj.image)
         else:
-            return 'http://' + settings.ALLOWED_HOSTS[2] + '/static/upload/' + str(obj.image)
+            return 'https://' + settings.ALLOWED_HOSTS[2] + '/static/upload/' + str(obj.image)
 
     def gain_original_url(self, obj):
         if settings.DEBUG:
-            return 'http://'+settings.ALLOWED_HOSTS[0]+':8000/articles/'+str(obj.original)
+            return 'https://'+settings.ALLOWED_HOSTS[0]+':8000/articles/'+str(obj.original)
         else:
-            return 'http://'+settings.ALLOWED_HOSTS[2]+'/articles/'+str(obj.original)
+            return 'https://'+settings.ALLOWED_HOSTS[2]+'/articles/'+str(obj.original)
 
     def gain_category_url(self, obj):
 
         if settings.DEBUG:
             for cate in obj.category.all():
-                return 'http://'+settings.ALLOWED_HOSTS[0]+':8000/articles/'+str(cate.category)
+                return 'https://'+settings.ALLOWED_HOSTS[0]+':8000/articles/'+str(cate.category)
         else:
             for cate in obj.category.all():
-                return 'http://'+settings.ALLOWED_HOSTS[2]+'/articles/'+str(cate.category)
+                return 'https://'+settings.ALLOWED_HOSTS[2]+'/articles/'+str(cate.category)
 
 
 

@@ -10,6 +10,8 @@ from rest_framework.pagination import LimitOffsetPagination, PageNumberPaginatio
 from blogs.models import Article, Category, Tag, Links, ChickenSoup, ClickWorld
 from blogs.serializers import ArticleSerializer
 
+from tqblogs import settings
+
 categorys = Category.objects.all()
 link = Links.objects.all().order_by('-rank')
 carousel = Article.objects.all().order_by('-like')
@@ -77,7 +79,7 @@ class ListView(APIView):
             type = category
         else:
             cate = Category.objects.get(category=category)
-            article = Article.objects.filter(category__article=cate.id)
+            article = Article.objects.filter(category__article__category=cate.id)
             type = cate.category
 
         chicken_id_list = []
@@ -126,7 +128,7 @@ class ListView(APIView):
 
 
 # 详情页
-class DetailView(View):
+class DetailView(APIView):
 
     def get(self, request, id):
         blogs = Article.objects.get(id=id)
@@ -165,12 +167,24 @@ class DetailView(View):
             'next':next,
             'world': world
         }
+        session_id = request.COOKIES.get(settings.SESSION_COOKIE_NAME, None)
+        request.session['session_id'] = session_id
 
         return render(request, 'blogs/detail.html', context)
 
-    def post(self, request):
-        pass
+    def post(self, request,id):
 
+        blogs_id = request.POST.get('blogs_id')
+        session_id = request.COOKIES.get(settings.SESSION_COOKIE_NAME, None)
+        
+        if request.session.get('session_blogs_id_'+blogs_id, None):
+            return JsonResponse({'code':201})
+        
+        request.session['session_blogs_id_'+blogs_id] = session_id + '_'+blogs_id
+        blogs = Article.objects.get(id=blogs_id)
+        blogs.add_like()
+
+        return JsonResponse({'code':200,'like':blogs.like})
 
 @csrf_exempt
 def page_not_found(request):

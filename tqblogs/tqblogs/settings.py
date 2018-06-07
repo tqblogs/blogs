@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
 SECRET_KEY = 'a#y^+j!%ycbdir-)aek)bi8&8&#wt6am7kay1#2vku6-um-d-y'
 
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1','localhost','www.tqblogs.cn','tqblogs.cn']
+ALLOWED_HOSTS = ['www.tqblogs.cn','tqblogs.cn']
 
 INSTALLED_APPS = [
     'reversion',
@@ -62,10 +62,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blogs',
-        'HOST':'localhost',
+        'HOST':'127.0.0.1',
         'PORT':'3306',
         'USER':'root',
-        'PASSWORD':'tqblogs'
+        'PASSWORD':'admin520tqblogs'
     }
 }
 
@@ -116,3 +116,8 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
+# csrf
+CSRF_COOKIE_NAME = 'csrf_token'
+
+# sessionid
+SESSION_COOKIE_NAME = 'session_id'
